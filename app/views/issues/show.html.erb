@@ -1,0 +1,90 @@
+<%= render partial: "shared/heading", locals: {title: "Requests"} %>
+<%= flash_messages %>
+<section id="issue" class="width-wrapper">
+  <ol class="breadcrumb">
+  <li>Requests</li>
+  <li class="active"><%= @issue.subject %></li>
+  </ol>
+  <br>
+  <%= issue_fa_button(@issue.current_state) %>
+    <h3> &nbsp;&nbsp;<%= @issue.subject %></h3><br/>
+    <div class="interaction-list">
+      <div class="interaction-timeline">
+
+        <div class="container-fluid">
+          <% @issue.interactions.each do |interaction| %>
+            <% if interaction.interacteable_type == "Message" %>
+              <div class="row">
+                <div class="col-md-1 hidden-xs hidden-sm"><%= image_tag interaction.user.picture, class: "img-rounded" %></div>
+                <div class="col-md-11 panel-message">
+                  <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-pointer"><strong><%= interaction.user.name %></strong> commented <%= time_ago_in_words interaction.created_at %> ago</div>
+                    <div class="panel-body"><%= interaction.interacteable.body.html_safe %>
+                    <% if interaction.interacteable.attachments.length > 0 %>
+                    <div class="panel-footer">
+                      <% interaction.interacteable.attachments.each do |attachment| %>
+                        <div class="file <%= attachment.file.file.extension %>">
+                          <a href="<%= attachment.file.url %>" download><%= truncate_filename(attachment.file_identifier) %></a>
+                        </div>
+                      <% end %>
+                    </div>
+                    <% end %>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            <% elsif interaction.interacteable_type == "IssueState" %>
+              <div class="interaction-state">
+                <div class="<%= interaction.interacteable.state %>-icon"> </div>
+                &nbsp;&nbsp;<strong><%= interaction.user.name %></strong>
+                <%= "reopened" if interaction.interacteable.state == "open"  %>
+                <%= "put on hold" if interaction.interacteable.state == "pending"  %>
+                <%= "closed" if interaction.interacteable.state == "closed"  %>
+                <%= time_ago_in_words interaction.created_at %> ago
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="closed-banner"></div>
+      <div class="container-fluid row message-reply">
+        <div class="col-md-1 hidden-xs hidden-sm"><%= image_tag current_user.picture, class: "img-rounded" %></div>
+        <div class="col-md-11 panel-message">
+          <div class="panel panel-default">
+            <div class="panel-heading panel-heading-pointer">Comment:</div>
+            <div class="panel-body">
+              <%= form_for [@issue, @interaction], html: {:id => "comment-form", :role => "form", :"data-pjax" => "true"} do |f| %>
+                <%= hidden_field_tag :interaction_type %>
+                <%= hidden_field_tag :body %>
+                <%= render partial: "shared/richtext" %>
+
+                <button id="send" class="btn btn-success pull-left">Comment</button> &nbsp;
+                <% if @issue.open? %>
+                  <div class="btn-group">
+                    <button data-toggle="dropdown" class="btn dropdown-toggle">Comment and change status <span class="caret"></span></button>
+                    <ul class="dropdown-menu pull-middle pull-center" style="margin-right: -95px; margin-top: -74px;">
+                      <li><a id="close" href="#">Comment and close request</a></li>
+                      <li><a id="hold" href="#">Comment and put request on hold</a></li>
+                    </ul>
+                  </div>
+                <% elsif @issue.pending? %>
+                  <div class="btn-group">
+                    <button data-toggle="dropdown" class="btn dropdown-toggle">Comment and change status <span class="caret"></span></button>
+                    <ul class="dropdown-menu pull-middle pull-center" style="margin-right: -95px; margin-top: -74px;">
+                      <li><a id="open" href="#">Comment and reopen request</a></li>
+                      <li><a id="close" href="#">Comment and close request</a></li>
+                    </ul>
+                  </div>
+                <% elsif @issue.closed? %>
+                  <button id="open" class="btn btn-default">Comment and reopen request</button>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <aside class="issue-actions hidden-xs">
+    </aside>
+</section>

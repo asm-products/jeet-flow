@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+commit_user:
+  id: 1
+  name: Commit User
+  tenant: commit
+  email: commit@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  profile_type: AssigneeProfile
+  profile_id: 1
+
+george:
+  id: 2
+  name: George Harisson
+  tenant: codify
+  email: george@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  profile_type: AssigneeProfile
+  profile_id: 3
+
+anna:
+  id: 3
+  name: Anna Louise
+  tenant: codify
+  email: anna@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  profile_type: AssigneeProfile
+  profile_id: 2
+
+john:
+  id: 4
+  name: John Doe
+  tenant: codify
+  email: johndoe@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  profile_type: RequestorProfile
+  profile_id: 4
+
+jane:
+  id: 5
+  name: Mary Jane
+  tenant: codify
+  email: maryjane@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  profile_type: RequestorProfile
+  profile_id: 5
+

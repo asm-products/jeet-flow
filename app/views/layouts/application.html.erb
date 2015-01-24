@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Desk</title>
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header id="topnav" class="navbar navbar-default navbar-fixed-top clearfix" role="banner">
+  <div class="width-wrapper">
+    <a class="navbar-brand" href="/">Jeet</a>
+
+    <div class="navbar-left navbar-collapse collapse in">
+      <ul class="nav navbar-nav hidden-xs">
+        <li><a href="/dashboard"><strong>Dashboard</strong></a></li>
+        <li><a href="/requests">Requests</a></li>
+        <li><a href="#" target="_blank">Users</a></li>
+        <li><a href="#" target="_blank">Admin</a></li>
+      </ul>
+    </div>
+
+    <ul class="nav navbar-nav toolbar pull-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle username" data-toggle="dropdown">
+          <span class="hidden-xs">Cássio Zen</span>
+
+          <img class="img-circle" src="https://lh4.googleusercontent.com/-DkCrZbWNfhI/AAAAAAAAAAI/AAAAAAAAAFo/vB1KNRyEla0/s60-c/photo.jpg?sz=50" />
+        </a>
+        <ul class="dropdown-menu userinfo">
+          <li><a href="#"><span class="pull-left">Edit Profile</span> <i class="pull-right fa fa-pencil"></i></a></li>
+          <li><a href="#"><span class="pull-left">Account Settings</span> <i class="pull-right fa fa-cogs"></i></a></li>
+          <li><a href="#"><span class="pull-left">Help</span> <i class="pull-right fa fa-question-circle"></i></a></li>
+          <li class="divider"></li>
+          <li><a href="#"><span class="pull-left">Sign Out</span> <i class="pull-right fa fa-sign-out"></i></a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</header>
+<div id="wrapper">
+  <div data-pjax-container>
+    <%= yield %>
+  </div> <!-- pjax-container -->
+</div> <!-- #wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<%= javascript_include_tag 'application' %>
+</body>
+</html>

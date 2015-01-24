@@ -1,0 +1,61 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+state_change_1:
+  id: 1
+  issue_id: 1
+  state: open
+
+state_change_2:
+  id: 2
+  issue_id: 1
+  state: pending
+
+state_change_3:
+  id: 3
+  issue_id: 1
+  state: closed
+
+state_change_4:
+  id: 4
+  issue_id: 1
+  state: open
+
+state_change_5:
+  id: 5
+  issue_id: 1
+  state: closed
+
+state_change_6:
+  id: 6
+  issue_id: 2
+  state: open
+
+state_change_7:
+  id: 7
+  issue_id: 2
+  state: pending
+
+state_change_8:
+  id: 8
+  issue_id: 3
+  state: open
+
+state_change_9:
+  id: 9
+  issue_id: 3
+  state: closed
+
+state_change_10:
+  id: 10
+  issue_id: 4
+  state: open
+
+state_change_11:
+  id: 11
+  issue_id: 5
+  state: open
+
+state_change_12:
+  id: 12
+  issue_id: 5
+  state: closed
